@@ -14,10 +14,14 @@ function receiveMessage(event)
             return false;
 
         if (msg.name === 'resize') {
+            var height = 140; // embed-size required height >= 100
+            if (height < msg.data.height) {
+              height = msg.data.height;
+            }
             window.parent.postMessage({
               sentinel: 'amp',
               type: 'embed-size',
-              height: msg.data.height
+              height: height
             }, '*');
         }
     }
